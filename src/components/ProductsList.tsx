@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { getProducts, Product } from '../api/base.api';
-import Loading from './Loading';
+import Loading from './LoadingComponent';
 import Error from './Error';
 
 const ProductList = () => {
