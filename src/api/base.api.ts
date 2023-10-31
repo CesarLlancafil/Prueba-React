@@ -1,20 +1,32 @@
-import axios from "axios"
+import axios from 'axios';
 
-const BASE_URL = "https://fakestoreapi.com/"
+export const getProducts = async () => {
+  try {
+    const response = await axios.get('https://fakestoreapi.com/products');
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
 
-export const instance = axios.create({
-    baseURL: BASE_URL
-})
+export interface Product {
+    id:          number;
+    title:       string;
+    price:       number;
+    description: string;
+    category:    Category;
+    image:       string;
+    rating:      Rating;
+}
 
-const endpoint = "products"
+export enum Category {
+    electronics = "electronics",
+    jewelery = "jewelery",
+    mensClothing = "men's clothing",
+    womensClothing = "women's clothing",
+}
 
-export const characters = {
-    getAll: function({page = 1}:{page?: number}){
-        return instance.get(endpoint, {params:{
-            page
-        }})
-    },
-    getById: function({id}:{id: string | undefined}){
-        return instance.get(`${endpoint}/${id}`)
-    }
-} 
+export interface Rating {
+    rate:  number;
+    count: number;
+}
